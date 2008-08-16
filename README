@@ -1,0 +1,16 @@
+This is a mirror of http://www.vim.org/scripts/script.php?script_id=2343
+
+*ku-bundle* is a source for |ku| to deal with bundles for a Vim plugin
+|bundle|.  You can choose one from many bundles and do some action to it.
+
+
+Requirements:
+- Vim 7.1 or later
+- |bundle| 0.0.2 or later (vimscript#2338)
+- |ku| 0.2.0 or later (vimscript#2337)
+
+Latest version:
+http://github.com/kana/vim-ku-bundle
+
+Document in HTML format:
+http://kana.github.com/config/vim/ku-bundle.html
