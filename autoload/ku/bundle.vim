@@ -1,5 +1,5 @@
 " ku source: bundle
-" Version: 0.1.0
+" Version: 0.1.1
 " Copyright (C) 2008-2009 kana <http://whileimautomaton.net/>
 " License: MIT license  {{{
 "     Permission is hereby granted, free of charge, to any person obtaining
@@ -137,59 +137,74 @@ function! s:open_by_source_file(bang, item)  "{{{2
   let _.word = _.ku_bundle_path
 
   if a:bang == '!'
-    call ku#file#action_open_x(_)
+    return ku#file#action_open_x(_)
   else
-    call ku#file#action_open(_)
+    return ku#file#action_open(_)
   endif
-  return
 endfunction
 
 
 
 
 function! ku#bundle#action_args(item)  "{{{2
-  if has_key(a:item, 'ku_bundle_path')
-    call s:open_by_source_file('', a:item)
+  if a:item.ku__completed_p
+    if has_key(a:item, 'ku_bundle_path')
+      return s:open_by_source_file('', a:item)
+    else
+      execute 'ArgsBundle' a:item.word
+      return 0
+    endif
   else
-    execute 'ArgsBundle' a:item.word
+    return 'No such bundle: ' . string(a:item.word)
   endif
-  return
 endfunction
 
 
 
 
 function! ku#bundle#action_args_x(item)  "{{{2
-  if has_key(a:item, 'ku_bundle_path')
-    call s:open_by_source_file('!', a:item)
+  if a:item.ku__completed_p
+    if has_key(a:item, 'ku_bundle_path')
+      return s:open_by_source_file('!', a:item)
+    else
+      execute 'ArgsBundle!' a:item.word
+      return 0
+    endif
   else
-    execute 'ArgsBundle!' a:item.word
+    return 'No such bundle: ' . string(a:item.word)
   endif
-  return
 endfunction
 
 
 
 
 function! ku#bundle#action_load(item)  "{{{2
-  if has_key(a:item, 'ku_bundle_path')
-    call s:open_by_source_file('', a:item)
+  if a:item.ku__completed_p
+    if has_key(a:item, 'ku_bundle_path')
+      return s:open_by_source_file('', a:item)
+    else
+      execute 'LoadBundle' a:item.word
+      return 0
+    endif
   else
-    execute 'LoadBundle' a:item.word
+    return 'No such bundle: ' . string(a:item.word)
   endif
-  return
 endfunction
 
 
 
 
 function! ku#bundle#action_load_x(item)  "{{{2
-  if has_key(a:item, 'ku_bundle_path')
-    call s:open_by_source_file('!', a:item)
+  if a:item.ku__completed_p
+    if has_key(a:item, 'ku_bundle_path')
+      return s:open_by_source_file('!', a:item)
+    else
+      execute 'LoadBundle!' a:item.word
+      return 0
+    endif
   else
-    execute 'LoadBundle!' a:item.word
+    return 'No such bundle: ' . string(a:item.word)
   endif
-  return
 endfunction
 
 
